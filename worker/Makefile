@@ -1,5 +1,5 @@
 VERSION=v1
-DOCKERUSER=YOUR_DOCKER_USERNAME_HERE
+DOCKERUSER=adonn1
 
 build:
 	docker build -f Dockerfile -t demucs-worker .

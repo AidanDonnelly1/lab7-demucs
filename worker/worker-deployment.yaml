@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: adonn1/demucs-worker:v1
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 500m
+            memory: 4Gi
+        env:
+        # full mdx_extra_q runs out of memory on minikube
+        - name: DEMUCS_MODEL
+          value: "83fc094f"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: MINIO_HOST
+          value: "minio:9000"
+        - name: MINIO_USER
+          value: "rootuser"
+        - name: MINIO_PASSWD
+          value: "rootpass123"

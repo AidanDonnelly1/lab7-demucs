@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+LABEL MAINTAINER="aido4381@colorado.edu"
+
+RUN pip3 install --no-cache-dir --upgrade redis jsonpickle requests flask minio
+
+WORKDIR /srv
+COPY rest-server.py /srv
+EXPOSE 5000
+CMD [ "python3", "rest-server.py" ]
